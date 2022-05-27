@@ -1,0 +1,54 @@
+<tr>
+  <td class="text-center">
+    <%= create_index params[:page], exam_counter, Settings.per_page_10 %>
+  </td>
+  <td>
+    <%= link_to attempts_in_exam_admin_exam_path(exam), target: :_blank do %>
+      <%= truncate exam.title, length: Settings.truncate_length_30 %>
+    <% end %>
+  </td>
+  <td>
+    <%= truncate exam.category.name, length: Settings.truncate_length_30 %>
+  </td>
+  <td>
+    <%= exam.user.user_name %>
+  </td>
+  <td class="text-center">
+    <%= Time.at(exam.duration).utc.strftime("%H:%M:%S") %>
+  </td>
+  <td class="text-center">
+    <span class="label label-success"><%= exam.result_pass %>/<%= exam.questions.count %></span>
+  </td>
+  <td>
+    <%= render "difficult_level", exam: exam %>
+  </td>
+  <td class="text-center">
+    <%= exam.max_number_of_times || "--" %>
+  </td>
+  <td class="text-center" >
+    <div class="btn-group option">
+      <%= link_to admin_exam_path(exam), class: "btn btn-xs btn-success button",
+        title: "Xem chi tiết", remote: true do %>
+        <i class="fa fa-eye"></i>
+      <% end %>
+    </div>
+    <div class="btn-group option">
+      <%= link_to attempts_in_exam_admin_exam_path(exam), class: "btn btn-xs btn-warning button",
+        title: "Xem kết quả học viên", target: :_blank do %>
+        <i class="fa fa-list-alt" aria-hidden="true"></i>
+      <% end %>
+    </div>
+    <div class="btn-group option">
+      <%= link_to edit_admin_exam_path(exam), class: "btn btn-xs btn-primary button",
+        title: "Sửa" do %>
+        <i class="fa fa-pencil icon"></i>
+      <% end %>
+    </div>
+    <div class="btn-group option">
+      <%= button_tag class: "btn btn-xs btn-danger confirm-delete-exam button",
+        title: "Xóa", data:{id: exam.id} do %>
+        <i class="fa fa-trash icon"></i>
+      <% end %>
+    </div>
+  </td>
+</tr>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TULO</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= favicon_link_tag asset_path('icon_app.png') %>
+  </head>
+
+  <body>
+    <div id="container">
+      <% if user_signed_in? && !(params[:controller] == "attempts" && params[:action] == "show")%>
+        <%= render 'layouts/header' %>
+      <% end %>
+      <div id="alert-notification" class="alert-notification alert-notification-dismissible">
+      </div>
+      <% if flash.present? %>
+        <%= render "shared/flash_messages" %>
+      <% end %>
+      <div class="container-body-user">
+        <%= yield %>
+      </div>
+      <%= render 'layouts/footer' %>
+    </div>
+  </body>
+</html>

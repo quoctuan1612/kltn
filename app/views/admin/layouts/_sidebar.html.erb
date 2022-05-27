@@ -1,0 +1,89 @@
+<div id="viewport">
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <header>
+      <%= link_to root_path do %>
+        <div class="app-title">
+          <%= image_tag asset_path('icon_app.png'), size: "40" %> &nbsp;
+          <span class="app-name">TULO</span>
+        </div>
+      <% end %>
+      <small style="color: white"><%= current_user.admin? ? "QUẢN TRỊ VIÊN" : "GIÁO VIÊN" %></small>
+    </header>
+    <ul class="nav">
+      <li>
+        <%= link_to admin_root_path, class: "#{active_class? admin_root_path}"  do %>
+          <%= fa_icon "bar-chart "%>
+          Thống kê
+        <% end %>
+      </li>
+      <% if current_user.admin? %>
+        <li>
+          <%= link_to admin_categories_path, class: "#{active_class? admin_categories_path}"  do %>
+            <%= fa_icon "book "%>
+            Danh mục
+          <% end %>
+        </li>
+      <% end %>
+      <li>
+        <%= link_to admin_questions_path, class: "#{active_class? admin_questions_path}"  do %>
+          <%= fa_icon "question-circle "%>
+          Câu hỏi
+        <% end %>
+      </li>
+      <% if current_user.admin? %>
+        <li>
+          <%= link_to admin_users_path, class: "#{active_class? admin_users_path}"  do %>
+            <%= fa_icon "user" %>
+            Người dùng
+          <% end %>
+        </li>
+      <% end %>
+      <li>
+        <%= link_to admin_exams_path, class: "#{active_class? admin_exams_path}"  do %>
+          <%= fa_icon "file" %>
+          Đề thi
+        <% end %>
+      </li>
+    </ul>
+  </div>
+  <!-- Content -->
+  <div id="content">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-right">
+
+          <li class="dropdown">
+            <%= link_to "javascript:void(0)", class: "dropdown-toggle", "data-toggle": "dropdown" do %>
+              <%= image_tag image_url(current_user), size: "40", class: "img-circle" %>
+              <i class="fa fa-angle-down"></i>
+            <% end %>
+            <ul class="dropdown-menu custom-dropdown">
+              <li class="dropdown-header text-center">
+                <strong><%= current_user.user_name %></strong>
+              </li>
+              <li>
+                <%= link_to root_path do %>
+                  <i class="fa fa-home fa-fw pull-right"></i>
+                  <p>Trang chủ</p>
+                <% end %>
+                <%= link_to edit_user_path(current_user) do %>
+                  <i class="fa fa-user fa-fw pull-right"></i>
+                  <p>Thông tin cá nhân</p>
+                <% end %>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <%= link_to signout_path, method: :delete do %>
+                  <i class="fa fa-sign-out fa-fw pull-right"></i> 
+                  <p>Đăng xuất</p>
+                <% end %>
+              </li>
+            </ul>
+          </li>
+
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>

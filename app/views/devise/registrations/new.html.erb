@@ -1,0 +1,79 @@
+<div class="header-signup-form">
+  <div class="text-center">
+    <%= image_tag asset_path('icon_app.png'), size: "100" %>
+    <h2>Đăng ký</h2>
+  </div>
+</div>
+<div class="signup-form">
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="pull-right">
+          <strong>Tên người dùng:</strong>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <%= f.input :user_name, autofocus: true, autocomplete: "user_name", label: false, placeholder: "Nhập tên tài khoản" %>
+      </div>
+    </div>    
+
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="pull-right">
+          <strong>Email:</strong>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <%= f.input :email, autocomplete: "email", label: false, placeholder: "Nhập email" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="pull-right">
+          <strong>Mật khẩu:</strong>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <%= f.input :password, autocomplete: "current-password", label: false, placeholder: "Nhập mật khẩu" %>
+        <%# if @minimum_password_length %>
+          <!--<em>(<%#= @minimum_password_length %> characters minimum)</em> 
+        <%# end %><br />-->
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="pull-right">
+          <strong>Nhập lại MK:</strong>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <%= f.input :password_confirmation, autocomplete: "current-password", label: false, placeholder: "Nhập lại mật khẩu" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3">
+      </div>
+      <div class="col-sm-8">
+        <div class="actions">
+          <%= f.button :button, type: "submit", class: "login-button" do %>
+            <strong>Đăng ký</strong>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <div class="row">
+      <div class="col-sm-3">
+      </div>
+      <div class="col-sm-8">
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+
+  <% end %>
+</div>
+

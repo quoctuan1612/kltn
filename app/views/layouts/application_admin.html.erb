@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TULO Management</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'admin/admin', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'admin/admin', 'data-turbolinks-track': 'reload' %>
+    <%= favicon_link_tag asset_path('icon_app.png') %>
+  </head>
+
+  <body>
+    <div class="lds-ellipsis" id="loading-modal"><div></div><div></div><div></div><div></div></div>
+    <div id="page-container">
+      <%= render 'admin/layouts/sidebar' %>
+      <div id="alert-notification" class="alert-notification alert-notification-dismissible">
+      </div>
+
+      <% if flash.present? %>
+        <%= render "shared/flash_messages" %>
+      <% end %>
+      <div class="container-body">
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>

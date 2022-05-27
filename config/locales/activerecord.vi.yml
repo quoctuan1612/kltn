@@ -1,0 +1,67 @@
+vi:
+  errors:
+   format: “%{message}”
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            user_name:
+              blank: Tên không được để trống
+              too_short: Quá ngắn. Tối thiểu %{count} ký tự
+              too_long: Qúa dài.Tối đa %{count} ký tự
+            email:
+              blank: Email không được để trống
+              invalid: "Email không hợp lệ"
+              taken: "Email đã tồn tại"
+            password:
+              blank: "Mật khẩu không được để trống"
+              too_short: "Mật khẩu quá ngắn. Tối thiểu %{count} ký tự"
+            password_confirmation:
+              confirmation: "Không trùng với mật khẩu trên"
+            reset_password_token:
+              blank: "Không được trống"
+        category:
+          attributes:
+            name:
+              blank: "không được trống"
+              taken: "Tên đã được sử dụng"
+            description:
+              blank: "không được trống"
+        question:
+          attributes:
+            content:
+              blank: "Nội dung không được trống"
+            base:
+              none_answer: Không có câu trả lời
+              none_true_answers: Chưa chọn câu trả lời đúng
+              invalid_answer: Có câu trả lời không có nội dung
+        exam:
+          attributes:
+            category_id:
+              blank: Danh mục không được trống
+            title:
+              blank: "Tên đề thi không được trống"
+              taken: "Tên đề thi này đã được sử dụng"
+              too_long: Không được dài quá 30 ký tự
+            duration:
+              blank: "Thời gian làm bài không được trống"
+              too_long: "Quá dài.Tối đa %{count} chữ số"
+              not_a_number: "Phải là số"
+              not_an_integer: "Phải là số nguyên dương"
+              greater_than: "Độ ưu tiên phải trên %{count}"
+            result_pass:
+              not_a_number: "Phải là số"
+              blank: "Điểm đỗ không được trống"
+              too_long: "Quá dài.Tối đa %{count} chữ số"
+              not_an_integer: "Phải là số nguyên dương"
+              greater_than: "Độ ưu tiên phải trên %{count}"
+              invalid_result_pass: "Điểm cần đạt nhỏ hơn hoặc bằng số câu hỏi trong bài"
+            max_number_of_times:
+              not_a_number: "Phải là số"
+              too_long: "Quá dài.Tối đa %{count} chữ số"
+              not_an_integer: "Phải là số nguyên dương"
+              greater_than: "phải lớn hơn %{count}"
+              have_user_do_much_time: "Đã có người làm đề thi hơn %{max} lần"
+            base:
+              none_question: Không có câu hỏi trong đề thi

@@ -1,0 +1,54 @@
+<tr>
+  <td class="text-center">
+    <%= create_index params[:page], attempt_counter, Settings.per_page_30 %>
+  </td>
+  <td class="text-center">
+    <%= truncate attempt.exam_title, length: Settings.truncate_length_30 %>
+  </td>
+  <td class="text-center">
+    <%= truncate attempt.exam_category_name, length: Settings.truncate_length_30 %>
+  </td>
+  <td class="text-center">
+    <%= attempt.created_at.localtime.strftime("%H:%M:%S %d-%m-%Y") %>
+  </td>
+  <td class="text-center">
+    <p class=" label label-<%= attempt.label_status %> ">
+      <%= attempt.i18n_status %>
+    </p>
+  </td>
+  <td class="text-center">
+    <%= Time.at(attempt.exam_duration).utc.strftime("%H:%M:%S") %>
+  </td>
+  <td class="text-center">
+    <%= Time.at(attempt.spent_time || attempt.exam_duration).utc.strftime("%H:%M:%S") %>
+  </td>
+  <td class="text-center">
+    <% if attempt.score %>
+      <%= attempt.score %>/<%= attempt.attempt_questions.size %> <%= raw attempt.result %>
+    <% else %>
+      --/--
+    <% end %>
+  </td>
+  <td class="text-center" >
+    <div class="btn-group option">
+      <% if attempt.finish? %>
+        <% if attempt.exam.is_show_detail_result %>
+          <%= link_to show_detail_attempt_path(attempt), class: "btn btn-xs btn-success button",
+            title: "Xem chi tiết", remote: true do %>
+            <i class="fa fa-eye"></i>
+          <% end %>
+        <% else %>
+          <%= link_to "javascript:void(0)", class: "btn btn-xs btn-warning button",
+            title: "Bài thi không được xem chi tiết", remote: true do %>
+            <i class="fa fa-eye-slash"></i>
+          <% end %>
+        <% end %>
+      <% else %>
+        <%= link_to attempt_path(attempt), class: "btn btn-xs btn-primary button",
+          title: "Tiếp tục làm" do %>
+          <i class="fa fa-play"></i>
+        <% end %>
+      <% end %>
+    </div>
+  </td>
+</tr>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  duration: 1
+  title: MyString
+  result_pass: 1
+  max_number_of_times: 1
+  category: one
+
+two:
+  duration: 1
+  title: MyString
+  result_pass: 1
+  max_number_of_times: 1
+  category: two

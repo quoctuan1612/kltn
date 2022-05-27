@@ -1,0 +1,43 @@
+<tr>
+  <td class="text-center">
+    <%= create_index params[:page], attempt_counter, Settings.per_page_20 %>
+  </td>
+  <td class="text-center">
+    <%= attempt.user.user_name %>
+  </td>
+  <td class="text-center">
+    <%= attempt.user.email %>
+  </td>
+  <td class="text-center">
+    <%= attempt.created_at.localtime.strftime("%H:%M:%S %d-%m-%Y") %>
+  </td>
+  <td class="text-center">
+    <p class=" label label-<%= attempt.label_status %> ">
+      <%= attempt.i18n_status %>
+    </p>
+  </td>
+  <td class="text-center">
+    <%= Time.at(attempt.spent_time || attempt.exam_duration).utc.strftime("%H:%M:%S") %>
+  </td>
+  <td class="text-center">
+    <% if attempt.score %>
+      <%= attempt.score %>/<%= attempt.attempt_questions.size %> <%= raw attempt.result %>
+    <% else %>
+      --/--
+    <% end %>
+  </td>
+  <td class="text-center" >
+    <div class="btn-group option">
+      <%= link_to show_detail_admin_attempt_path(attempt), class: "btn btn-xs btn-success button",
+        title: "Xem chi tiết", remote: true do %>
+        <i class="fa fa-eye"></i>
+      <% end %>
+    </div>
+    <div class="btn-group option">
+      <%= link_to "javascript:void(0)", class: "btn btn-xs btn-danger button delete-attempt",
+        title: "Xóa kết quả", data: {id: attempt.id} do %>
+        <i class="fa fa-trash"></i>
+      <% end %>
+    </div>
+  </td>
+</tr>

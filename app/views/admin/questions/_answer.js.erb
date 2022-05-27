@@ -1,0 +1,9 @@
+$('#js-select-question-type').on('change', function() {
+  var type = $(this).val();
+  if (type == 'single_choice'){
+    $('#answers-form-container input[type=checkbox]').prop('type', 'radio');
+    $('#answers-form-container input[type=radio]').prop('checked', false);
+  } else {
+    $('#answers-form-container input[type=radio]').prop('type', 'checkbox');
+  }
+})

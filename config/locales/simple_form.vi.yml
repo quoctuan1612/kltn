@@ -1,0 +1,8 @@
+vi:
+  simple_form:
+    "yes": "Có"
+    "no": "Không"
+    required:
+      html: "<span class='text-danger'>*</span>"
+    error_notification:
+      default_message: "Vui lòng xem lại các vấn đề dưới đây:"

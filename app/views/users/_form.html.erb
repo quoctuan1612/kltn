@@ -1,0 +1,105 @@
+<div class="row">
+  <div class="col-lg-4">
+    <div class="block">
+      <div class="block-title">
+        <h4>
+          <i class="fa fa-info-circle"></i>
+          Ảnh đại diện
+        </h4>
+      </div>
+      <div class="text-center">
+        <div class="store-item-image">
+          <%= image_tag image_url(@user), size: "280" %>
+        </div>
+      </div>
+      <hr>
+    </div>
+  </div>
+  <div class="col-lg-8">
+    <div class="block">
+      <div class="block-title">
+        <h4>
+          <i class="fa fa-info-circle"></i>
+          Thông tin người dùng
+        </h4>
+      </div>
+      <%= simple_form_for @user, html: {class: "update-info-form"} do |f| %>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="pull-right">
+              <strong>Tên người dùng</strong>
+            </div>
+          </div>
+          <div class="col-md-7">
+            <%= f.input :user_name, label: false, disabled: true %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <div class="pull-right">
+              <strong>Email</strong>
+            </div>
+          </div>
+          <div class="col-md-7">
+            <%= f.input :email, label: false, disabled: true %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <div class="pull-right">
+              <strong>Mật khẩu</strong>
+            </div>
+          </div>
+          <div class="col-md-7">
+            <%= f.input :password, label: false, disabled: true %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <div class="pull-right">
+              <strong>Nhập lại mật khẩu</strong>
+            </div>
+          </div>
+          <div class="col-md-7">
+            <%=f.input :password_confirmation, label: false, disabled: true %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <div class="pull-right">
+              <strong>Ảnh đại diện</strong>
+            </div>
+          </div>
+          <div class="col-md-7">
+            <%= f.file_field :avatar, class: "form-control js-workspace-image", disabled: true %>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-3">
+          </div>
+          <div class="col-md-7">
+            <%= button_tag type: :button, class: "btn btn-sm btn-warning js-button-edit" do %>
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+              Sửa
+            <% end %>
+            <%= button_tag type: :button, class: "btn btn-sm btn-danger js-button-cancel hidden" do %>
+              <i class="fa fa-times" aria-hidden="true"></i>
+              Hủy
+            <% end %>
+            <%= f.button :button, type: "button", title: "Lưu",
+              class: "btn btn-sm btn-primary js-button-update-info-form hidden" do %>
+              <i class="fa fa-floppy-o" aria-hidden="true"></i>
+              Lưu
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      <hr>
+    </div>
+  </div>
+</div>

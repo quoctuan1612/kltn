@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  attempt: one
+  question: one
+  selected_answer: MyString
+
+two:
+  attempt: two
+  question: two
+  selected_answer: MyString

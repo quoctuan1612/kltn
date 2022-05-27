@@ -1,0 +1,94 @@
+<div class="modal-dialog modal-lg modal-show-question">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h4 class="modal-title">Chi tiết câu hỏi</h4>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="block">
+            <div class="block-title">
+              <h4>
+                <i class="fa fa-info-circle"></i>
+                Thông tin câu hỏi
+              </h4>
+            </div>
+            <div class="row">
+              <div class="col-sm-1"><i class="fa fa-book"></i></div>
+              <div class="col-sm-10"><strong>Thuộc danh mục:</strong></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-10">
+                <%= @question.category_name %>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-1"><i class="fa fa-user"></i></div>
+              <div class="col-sm-10"><strong>Người tạo:</strong></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-10">
+                <%= @question.user.user_name %>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-1"><i class="fa fa-level-up"></i></div>
+              <div class="col-sm-10"><strong>Độ khó:</strong></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-10">
+                <p class="label label-<%= @question.level_label %>"><%= @question.level_i18n %></p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-1"><i class="fa fa-list"></i></div>
+              <div class="col-sm-10"><strong>Loại câu hỏi:</strong></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-10">
+                <p class="label label-<%= @question.question_type_label %>"><%= @question.question_type_i18n %></p>
+              </div>
+            </div>
+            <hr>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="block">
+            <div class="block-title">
+              <h4>
+                <i class="fa fa-info-circle"></i>
+                Nội dung câu hỏi
+              </h4>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <strong>Câu hỏi :</strong>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12 show-question-content">
+                <%= raw @question.content %>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-12">
+                <strong>Đáp án :</strong>
+              </div>
+            </div>
+            <%= render partial: "answer.html.erb", collection: @question.answers, as: :answer %>
+            <hr>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

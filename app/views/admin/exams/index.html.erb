@@ -1,0 +1,73 @@
+<div class="content-header">
+  <div class="header-section">
+    <h2>
+      <i class="fa fa-file">&nbsp;</i>Quản lý đề thi<br>
+      <small>Trang quản lý đề thi</small>
+    </h2>
+  </div>
+</div>
+<div class="block full">
+  <div class="block-title">
+    <h4> Danh sách đề thi </h4>
+  </div><br>
+  <div class="table-responsive test-created-table">
+    <div class="dataTables_wrapper">
+      <div class="row">
+        <div class="col-md-3 mb-10 remove-padding">
+          <div>
+            <%= link_to new_admin_exam_path, class: "btn btn-primary margin-left-5" do %>
+              <i class="fa fa-plus"></i> Thêm đề thi
+            <% end %>
+          </div>
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-md-3">
+          <%= select_tag :category, options_for_select(select_box_category), class: "select-select2", 
+            include_blank: "-- Chọn danh mục --", id: "category-filter-exam" %>
+        </div>
+        <div class="col-md-3">
+          <%= select_tag :user, options_for_select(select_box_contributor), class: "select-select2", 
+            include_blank: "-- Chọn người tạo --", id: "user-filter-exam" %>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+          <div class="pull-right">
+            <div class="input-group">
+              <%= text_field_tag "title_or_category_name_cont", nil, class: "form-control", 
+                placeholder: "Tìm kiếm đề thi theo tiêu đề và tên danh mục",
+                id: "admin_exam_search" %>
+              <div class="input-group-btn">
+                <%= button_tag(name: nil, class: "btn btn-primary", id: "admin_exam_search_btn") do %>
+                  <i class="fa fa-search"></i>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><br>
+      <table class="table table-vcenter table-condensed table-bordered">
+        <thead>
+          <tr>
+            <th class="text-center">STT</th>
+            <th class="text-center">Tên bài thi</th>
+            <th class="text-center">Danh mục</th>
+            <th class="text-center">Người tạo</th>
+            <th class="text-center">Thời gian làm bài</th>
+            <th class="text-center">Điểm đạt</th>
+            <th class="text-center width-20percent">Độ khó</th>
+            <th class="text-center width-10percent">Số lần làm tối đa</th>
+            <th class="text-center">Tùy chọn</th>
+          </tr>
+        </thead>
+        <tbody id="list-exams">
+          <%= render @exams %>
+        </tbody>
+      </table>
+    </div>
+    <div class="digg_pagination">
+      <%= will_paginate @exams %>
+    </div>
+  </div>
+</div>
+<div id="show-exam-modal" class="modal fade" data-backdrop="static"></div>

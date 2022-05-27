@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-sm-2">
+    <span class="<%= answer.is_true ? "text-success" : "text-danger" %>">
+      Đáp án
+      <%= answer_counter + 1 %>:
+      <%= answer.is_true ? "(Đúng)" : "(Sai)" %>
+    </span>
+  </div>
+  <div class="col-sm-10">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= raw answer.content %>
+      </div>
+    </div>
+  </div>
+</div>

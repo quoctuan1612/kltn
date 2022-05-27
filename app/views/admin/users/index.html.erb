@@ -1,0 +1,67 @@
+<div class="content-header">
+  <div class="header-section">
+    <h2>
+      <i class="fa fa-user">&nbsp;</i>Quản lý người dùng<br>
+      <small>Trang quản lý người dùng</small>
+    </h2>
+  </div>
+</div>
+<div class="block full">
+  <div class="block-title">
+    <h4> Danh sách người dùng </h4>
+  </div><br>
+  <div class="table-responsive test-created-table">
+    <div class="dataTables_wrapper">
+      <div class="row">
+        <div class="col-md-3 mb-10 remove-padding">
+          <div>
+            <%= link_to new_admin_user_path, remote: true, class: "btn btn-primary margin-left-5" do %>
+              <i class="fa fa-plus"></i> Thêm người dùng
+            <% end %>
+          </div>
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-md-3">
+          <%= select_tag :role, options_for_select(select_box_role), class: "select-select2", 
+            include_blank: "-- Chọn quyền --", id: "role-filter-user" %>
+        </div>
+        <div class="col-md-5"></div>
+        <div class="col-md-4">
+          <div class="pull-right">
+            <div class="input-group">
+              <%= text_field_tag "user_name_or_email_cont", nil, class: "form-control", 
+                placeholder: "Tìm kiếm người dùng theo tên và email",
+                id: "admin_user_search" %>
+              <div class="input-group-btn">
+                <%= button_tag(name: nil, class: "btn btn-primary", id: "admin_user_search_btn") do %>
+                  <i class="fa fa-search"></i>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><br>
+      <table class="table table-vcenter table-condensed table-bordered">
+        <thead>
+          <tr>
+            <th class="text-center">STT</th>
+            <th class="text-center">Ảnh đại diện</th>
+            <th class="text-center">Tên người dùng</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Quyền người dùng</th>
+            <th class="text-center">Tùy chọn</th>
+          </tr>
+        </thead>
+        <tbody id="list-users">
+          <%= render @users %>
+        </tbody>
+      </table>
+    </div>
+    <div class="digg_pagination">
+      <%= will_paginate @users %>
+    </div>
+  </div>
+</div>
+<div id="user-modal" class="modal fade" data-backdrop="static"></div>
+<div id="show-user-modal" class="modal fade" data-backdrop="static"></div>

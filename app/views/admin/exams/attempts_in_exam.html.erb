@@ -1,0 +1,108 @@
+<div class="content-header">
+  <div class="header-section">
+    <h2>
+      <i class="fa fa-check-square-o"></i>&nbsp;</i>Trang xem kết quả học viên<br>
+      <br>
+    </h2>
+  </div>
+</div>
+<%= link_to admin_exams_path, class: "btn btn-primary margin-left-5" do %>
+  <i class="fa fa-arrow-left" aria-hidden="true">&nbsp;</i> Quay về trang quản lý đề thi
+<% end %>
+<br><br>
+<div class="block">
+  <div class="block-title">
+    <h4><i class="fa fa-info-circle"></i>&nbsp;Thông tin đề thi</h4>
+  </div>
+  <table class="table table-striped table-exam-infor">
+    <tbody>
+      <tr>
+        <th scope="row"><i class="fa fa-tag"></i>&nbsp;Tên đề thi:</th>
+        <td><%= @exam.title %></td>
+      </tr>
+      <tr>
+        <th scope="row"><i class="fa fa-book"></i>&nbsp;Thuộc danh mục:</th>
+        <td><%= @exam.category_name %></td>
+      </tr>
+      <tr>
+        <th scope="row"><i class="fa fa-clock-o"></i>&nbsp;Thời gian làm tối đa:</th>
+        <td><%= @exam.duration/60 %> phút</td>
+      </tr>
+      <tr>
+        <th scope="row"><i class="fa fa-bullseye"></i>&nbsp;Điểm cần đạt:</th>
+        <td><%= @exam.result_pass %></td>
+      </tr>
+      <tr>
+        <th scope="row"><i class="fa fa-pencil"></i>&nbsp;Số lần làm tối đa:</th>
+        <td><%= @exam.max_number_of_times || "--" %></td>
+      </tr>
+      <tr>
+        <th scope="row"><i class="fa fa-users"></i>&nbsp;Số người tham gia:</th>
+        <td><%= @exam.attempts.pluck(:user_id).uniq.count %></td>
+      </tr>
+      <tr>
+        <th scope="row"><i class="fa fa-file"></i>&nbsp;Số bài thi:</th>
+        <td><%= @exam.attempts.count %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br>
+<div class="row">
+  <%= hidden_field_tag :exam_id, @exam.id %>
+  <div class="col-md-3">
+    <%= select_tag :filter_status_attempts_in_exam, 
+      options_for_select(select_box_status),
+      include_blank: "--Chọn trạng thái--",
+      class: "select-select2 form-control",
+      id: "filter-status-attempts-in-exam" %>
+  </div>
+  <div class="col-md-3">
+    <%= select_tag :filter_status_attempts_in_exam, 
+      options_for_select(select_box_result),
+      include_blank: "--Chọn kết quả--",
+      class: "select-select2 form-control",
+      id: "filter-result-attempts-in-exam" %>
+  </div>
+  <div class="col-md-6">
+    <div class="input-group">
+      <%= text_field_tag "email_or_user_name_cont", nil, class: "form-control", 
+        placeholder: "Tìm kiếm đề thi theo tiêu đề và tên danh mục",
+        id: "search-users-attempt-in-exam" %>
+      <div class="input-group-btn">
+        <%= button_tag(name: nil, class: "btn btn-primary", id: "search-users-attempt-in-exam-btn") do %>
+          <i class="fa fa-search"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th class="text-center" scope="col">#</th>
+      <th class="text-center" scope="col">Tên người làm</th>
+      <th class="text-center" scope="col">Email</th>
+      <th class="text-center" scope="col">Ngày làm</th>
+      <th class="text-center" scope="col">Trạng thái</th>
+      <th class="text-center" scope="col">Thời gian hoàn thành</th>
+      <th class="text-center" scope="col">Kết quả</th>
+      <th class="text-center" scope="col">Tùy chọn</th>
+    </tr>
+  </thead>
+  <tbody class="list-attempts">
+    <% if @attempts.any? %>
+      <%= render partial: "attempt", collection: @attempts, as: :attempt %>
+    <% end %>
+  </tbody>
+</table>
+<% if @attempts.empty? %>
+  <div class="text-center">
+    <small>Chưa có ai làm đề thi này</small>
+  </div>
+<% end %>
+<div class="digg_pagination">
+  <%= will_paginate @attempts %>
+</div>
+<div id="show-attempt-modal" class="modal fade" data-backdrop="static"></div>

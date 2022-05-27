@@ -1,0 +1,4 @@
+vi:
+  will_paginate:
+    next_label: Trang sau
+    previous_label: Trang trước

@@ -1,0 +1,8 @@
+{
+  "name": "tttn",
+  "private": true,
+  "dependencies": {
+    "select2": "^4.0.13",
+    "sweetalert": "^2.1.2"
+  }
+}

@@ -1,0 +1,119 @@
+<div class="modal-dialog modal-lg modal-show-question">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h4 class="modal-title"><%= title %></h4>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="block">
+            <div class="block-title">
+              <h4>
+                <i class="fa fa-info-circle"></i>
+                Ảnh đại diện
+              </h4>
+            </div>
+            <div class="text-center">
+              <div class="store-item-image">
+                <%= image_tag image_url(@user), size: "280" %>
+              </div>
+            </div>
+            <hr>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="block">
+            <div class="block-title">
+              <h4>
+                <i class="fa fa-info-circle"></i>
+                Thông tin người dùng
+              </h4>
+            </div>
+            <%= simple_form_for [:admin, @user], html: {class: "js-user-form"} do |f| %>
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="text-right">
+                    <strong><span class="text-danger">* </span>Tên người dùng</strong>
+                  </div>
+                </div>
+                <div class="col-md-7">
+                  <%= f.input :user_name, label: false %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="text-right">
+                    <strong><span class="text-danger">* </span>Email</strong>
+                  </div>
+                </div>
+                <div class="col-md-7">
+                  <%= f.input :email, label: false %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="text-right">
+                    <strong><span class="text-danger">* </span>Mật khẩu</strong>
+                  </div>
+                </div>
+                <div class="col-md-7">
+                  <%= f.input :password, label: false %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="text-right">
+                    <strong><span class="text-danger">* </span>Nhập lại mật khẩu</strong>
+                  </div>
+                </div>
+                <div class="col-md-7">
+                  <%=f.input :password_confirmation, label: false %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="text-right">
+                    <strong>Vai trò</strong>
+                  </div>
+                </div>
+                <div class="col-md-7">
+                  <%= f.input :role, as: :select, collection: select_box_role, selected: @user.role, label: false,
+                    disabled: (@user == current_user) %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="text-right">
+                    <strong>Ảnh đại diện</strong>
+                  </div>
+                </div>
+                <div class="col-md-7">
+                  <%= f.file_field :avatar, class: "form-control js-workspace-image" %>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-7">
+                  <%= f.button :button, type: "button", title: "Lưu",
+                    class: "btn btn-sm btn-primary js-button-form-user" do %>
+                    <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                    Lưu
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+            <hr>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,147 @@
+<div class="modal-dialog modal-lg modal-show-question">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h4 class="modal-title">Chi tiết đề thi</h4>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="block">
+            <div class="block-title">
+              <h4>
+                <i class="fa fa-info-circle"></i>
+                Thông tin đề thi
+              </h4>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-1"><i class="fa fa-file-text"></i></div>
+              <div class="col-sm-10"><strong>Tên đề thi:</strong></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-10">
+                <p><%= @exam.title %></p>
+              </div>
+            </div>
+            <hr>
+
+            <div class="row">
+              <div class="col-sm-1"><i class="fa fa-book"></i></div>
+              <div class="col-sm-10"><strong>Thuộc danh mục:</strong></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-10">
+                <p><%= @exam.category_name %></p>
+              </div>
+            </div>
+            <hr>
+
+            <div class="row">
+              <div class="col-sm-1"><i class="fa fa-user"></i></div>
+              <div class="col-sm-10"><strong>Người tạo:</strong></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-10">
+                <p><%= @exam.user.user_name %></p>
+              </div>
+            </div>
+            <hr>
+
+            <div class="row">
+              <div class="col-sm-1"><i class="fa fa-clock-o"></i></div>
+              <div class="col-sm-10"><strong>Thời gian làm bài:</strong></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-10">
+                <p><%= @exam.duration/60 %> (Phút)</p>
+              </div>
+            </div>
+            <hr>
+
+            <div class="row">
+              <div class="col-sm-1"><i class="fa fa-bullseye"></i></div>
+              <div class="col-sm-10"><strong>Điểm cần đạt:</strong></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-10">
+                <p><%= @exam.result_pass %></p>
+              </div>
+            </div>
+            <hr>
+
+            <div class="row">
+              <div class="col-sm-1"><i class="fa fa-bullseye"></i></div>
+              <div class="col-sm-10"><strong>Độ khó:</strong></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-10">
+                <%= render "difficult_level", exam: @exam %>
+              </div>
+            </div>
+            <hr>
+
+            <div class="row">
+              <div class="col-sm-1"><i class="fa fa-pencil"></i></div>
+              <div class="col-sm-10"><strong>Số lần làm tối đa:</strong></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-10">
+                <p><%= @exam.max_number_of_times || "--" %></p>
+              </div>
+            </div>
+            <hr>
+
+            <div class="row">
+              <div class="col-sm-1"><i class="fa fa-eye"></i></div>
+              <div class="col-sm-10"><strong>Cho phép xem lại bài làm:</strong></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-10">
+                <label class="switch <%= @exam.is_show_detail_result && "switch-primary" %>">
+                  <%= check_box_tag :is_show_detail_result, nil, @exam.is_show_detail_result, disabled: true %>
+                  <span></span>
+                </label>
+              </div>
+            </div>
+            <hr>
+
+            <div class="row">
+              <div class="col-sm-1"><i class="fa fa-file-text"></i></div>
+              <div class="col-sm-10"><strong>Mật khẩu:</strong></div>
+            </div>
+            <div class="row">
+              <div class="col-sm-1"></div>
+              <div class="col-sm-10">
+                <p><%= @exam.password %></p>
+              </div>
+            </div>
+            <hr>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="block">
+            <div class="block-title">
+              <h4>
+                <i class="fa fa-info-circle"></i>
+                Nội dung đề thi
+              </h4>
+            </div>
+            <div class="list-question-show-exam">
+              <%= render partial: "question", collection: @exam.questions, as: :question %>
+            </div>
+            <hr>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<%= render "shared/js_flash_messages.js.erb" %>
+$('#submit-exam-btn').attr('disabled', false);
+$('.js-exam-title-errors').html('<%= @exam.errors[:title]&.first %>');
+$('.js-exam-duration-errors').html('<%= @exam.errors[:duration]&.first %>');
+$('.js-exam-result-pass-errors').html('<%= @exam.errors[:result_pass]&.first %>');
+<% if @exam.max_number_of_times %>
+  $('.js-exam-max-times-errors').html('<%= @exam.errors[:max_number_of_times]&.first %>');
+<% end %>
+$('.js-exam-base-errors').html('<%= j render partial: "shared/base_errors", locals: {object: @exam} %>');

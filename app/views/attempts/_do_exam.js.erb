@@ -1,0 +1,101 @@
+function formatTime(seconds) {
+  var h = Math.floor(seconds / 3600),
+      m = Math.floor(seconds / 60) % 60,
+      s = seconds % 60;
+  if (h < 10) h = "0" + h;
+  if (m < 10) m = "0" + m;
+  if (s < 10) s = "0" + s;
+  return h + ":" + m + ":" + s;
+}
+
+var count = <%= @attempt.created_at.to_i + @attempt.exam.duration - Time.zone.now.to_i %>;
+var counter = setInterval(timer, 1000);
+var spent_time = -1;
+
+function timer() {
+  count--;
+  spent_time++;
+  $('.countdown').html(formatTime(count));
+  if (count < 0) {
+    if(spent_time < 1)
+      spent_time = <%= @attempt.exam.duration %>;
+    clearInterval(counter);
+    $('.countdown').html('00:00:00');
+    swal({
+      title: 'Đã hết thời gian làm bài',
+      icon: 'warning',
+      closeOnClickOutside: false,
+      buttons: {
+        confirm: {
+          text: 'Đồng ý',
+          value: true,
+          visible: true,
+        }
+      },
+    }).then(function(isConfirm){
+      if (isConfirm) {
+        $('#form-do-exam').find('input#attempt_spent_time').val(spent_time);
+        $('#form-do-exam').submit();
+      }
+    });
+  }
+}
+
+$('body').on('click', '#submit-attempt', function(){
+  swal({
+    title: 'Bạn muốn nộp bài?',
+    icon: 'warning',
+    closeOnClickOutside: false,
+    buttons: {
+      cancel: {
+        text: 'Hủy bỏ',
+        value: null,
+        visible: true,
+      },
+      confirm: {
+        text: 'Đồng ý',
+        value: true,
+        visible: true,
+      }
+    },
+  }).then(function(isConfirm){
+    if (isConfirm) {
+      $('#form-do-exam').find('input#attempt_spent_time').val(spent_time);
+      $('#form-do-exam').submit();
+    }
+    else {
+      swal.close();
+    }
+  });
+});
+
+var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+var outfocus_interval;
+
+function handleEnterTab() {
+  $('#outfocus-warning-container').addClass('display-none');
+  clearInterval(outfocus_interval);
+}
+
+function handleLeaveTab() {
+  $('#outfocus-warning-container').removeClass('display-none');
+  var time = 10;
+  var outfocus_countdown = function() {
+    time--;
+    $('#outfocus-warning-time-left').html(('0' + time).slice(-2));
+    if (time < 0) {
+      clearInterval(outfocus_interval);
+      $('#outfocus-warning-time-left').html('00');
+      $('#form-do-exam').find('input#attempt_spent_time').val(spent_time);
+      $('#form-do-exam').submit();
+    }
+  }
+  outfocus_interval = setInterval(outfocus_countdown, 1000);
+  outfocus_countdown();
+}
+
+if (!isMobile)
+{
+  $(window).on('mouseleave', handleLeaveTab);
+  $(window).on('mouseenter', handleEnterTab);
+}

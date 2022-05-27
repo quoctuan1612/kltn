@@ -1,0 +1,15 @@
+<% @category ||= Category.find_by id: params.dig(:exam, :category_id) %>
+<div class="content-header">
+  <div class="header-section">
+    <h2>
+      <i class="fa fa-book">&nbsp;</i>Quản lý đề thi<br>
+      <small>Trang thêm mới đề thi</small>
+    </h2>
+  </div>
+</div>
+<div class="block full">
+  <div class="block-title text-center">
+    <strong> Thêm mới đề thi </strong>
+  </div><br>
+  <%= render "form" %>
+</div>

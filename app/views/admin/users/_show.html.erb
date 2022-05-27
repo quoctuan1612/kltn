@@ -1,0 +1,39 @@
+<div class="modal-dialog modal-lg">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h4 class="modal-title">Chi tiết người dùng</h4>
+    </div>
+    <div class="modal-body">
+    	<div class="block full">
+			  <div class="block-title">
+			    <h2 class="text-center"><strong>Thông tin người dùng</strong></h2>
+			  </div>
+			  <table class="table table-borderless table-striped table-vcenter">
+			    <tbody>
+			      <tr>
+			        <td rowspan="5" class="avatar-td">
+			          <%= image_tag image_url(@user), size: "150",
+			            class: "img-circle pull-left" %>
+			        </td>
+			        <td class="title-td"><strong>Tên người dùng</strong></td>
+			        <td><%= @user.user_name %></td>
+			      </tr>
+			      <tr>
+			        <td><strong>Email</strong></td>
+			        <td><%= @user.email %></td>
+			      </tr>
+			      <tr>
+			        <td><strong>Vai trò</strong></td>
+			        <td>
+			          <span class="label label-<%= @user.role_label %>">
+			            <%= @user.role_i18n %>
+			          </span>    
+			        </td>
+			      </tr>
+			    </tbody>
+			  </table>
+			</div>
+    </div>
+  </div>
+</div>

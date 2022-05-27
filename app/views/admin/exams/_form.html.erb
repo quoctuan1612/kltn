@@ -1,0 +1,209 @@
+<%= simple_form_for [:admin, @exam], html: {id: "exam-form"} do |f| %>
+  <%= f.hidden_field :user_id, value: @exam.user&.id || current_user.id %>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-7">
+      <div class="text-danger">
+        <div class="js-exam-base-errors"></div><br>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="pull-right">
+        <strong><span class="text-danger">* </span>Danh mục</strong>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <%= f.input :category_id, as: :select, collection: select_box_category, selected: @exam.category_id,
+        include_blank: false, input_html: {class: "select-select2", id: "select-category-exam"},
+        label: false, disabled: @exam.category_id.present? %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-7">
+      <div class="text-danger">
+        <div class="js-exam-title-errors"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+      <div class="pull-right">
+        <strong><span class="text-danger">* </span>Tên đề thi</strong>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <%= f.input :title, label: false, placeholder: "Nhập tên bài thi" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-7">
+      <div class="text-danger">
+        <div class="js-exam-duration-errors"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+      <div class="pull-right">
+        <strong><span class="text-danger">* </span>Thời gian làm bài (Phút)</strong>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <%= f.input :duration, as: :integer, input_html: {value: (f.object.duration/60 if f.object.duration)},
+      label: false, placeholder: "Nhập số phút" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-7">
+      <div class="text-danger">
+        <div class="js-exam-result-pass-errors"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+      <div class="pull-right">
+        <strong><span class="text-danger">* </span>Điểm cần đạt</strong>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <%= f.input :result_pass, as: :integer, label: false, placeholder: "Nhập số điểm đỗ bài thi" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-7">
+      <div class="text-danger">
+        <div class="js-exam-max-times-errors"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+      <div class="pull-right">
+        <strong>Số lần làm tối đa</strong>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <%= f.input :max_number_of_times, as: :integer, label: false, placeholder: "Nhập số lần làm tối đa" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+      <div class="pull-right">
+        <strong>Cho phép xem lại bài làm</strong>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <%= f.input :is_show_detail_result, label: false do %>
+        <label class="switch <%= @exam.is_show_detail_result && "switch-primary" %>">
+          <%= f.check_box :is_show_detail_result, {checked: @exam.is_show_detail_result?} %>
+          <span></span>
+        </label>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+      <div class="pull-right">
+        <strong>Mật khẩu</strong>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <%= f.input :password, label: false, placeholder: "Nhập mật khẩu" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-3">
+      <div class="pull-right">
+        <strong>Chọn nhanh câu hỏi</strong>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <table class="random-question-table">
+        <tr>
+          <td><%= text_field_tag :number_questions, nil, class: "form-control", 
+            placeholder: "Số câu hỏi", disabled: @exam.any_perform? %></td>
+          <td>Câu hỏi</td>
+        </tr>
+        <tr>
+          <td><%= text_field_tag :random_hard, nil, min: 0, max: 100, step: 5, class: "form-control", 
+            placeholder: "Tỉ lệ câu hỏi khó", disabled: @exam.any_perform? %></td>
+          <td>%(Khó)</td>
+          <td><%= button_tag "Lấy ngẫu nhiên", type: 'button', class: "btn btn-primary",
+            id: "random-question-button", disabled: @exam.any_perform? %></td>
+          <td><%= button_tag "Bỏ chọn câu hỏi", type: 'button', class: "btn btn-warning",
+            id: "reset-question-button", disabled: @exam.any_perform? %></td>
+        </tr>
+        <tr>
+          <td><%= text_field_tag :random_medium, nil, min: 0, max: 100, step: 5, class: "form-control",
+            placeholder: "Tỉ lệ câu hỏi trung bình", disabled: @exam.any_perform? %></td>
+          <td>%(Trung bình)</td>
+        </tr>
+      </table>
+    </div>
+  </div><br>
+
+  <div class="row">
+    <div class="col-md-3">
+      <div class="text-right">
+        <strong><span class="text-danger">* </span>Câu hỏi</strong><br><br>
+        <p class="inline-block">Dễ</p>&nbsp;
+        <div class="label label-primary">
+          <span class="exam-form-easy-percent"><%= @exam.easy_percent %></span>
+          (<span class="exam-form-easy-count"><%= @exam.easy_questions_count %></span>)
+        </div>
+        <br>
+
+        <p class="inline-block">Trung bình</p>&nbsp;
+        <div class="label label-warning">
+          <span class="exam-form-medium-percent"><%= @exam.medium_percent %></span>
+          (<span class="exam-form-medium-count"><%= @exam.medium_questions_count %></span>)
+        </div>
+        <br>
+
+        <p class="inline-block">Khó</p>&nbsp;
+        <div class="label label-danger">
+          <span class="exam-form-hard-percent"><%= @exam.hard_percent %></span>
+          (<span class="exam-form-hard-count"><%= @exam.hard_questions_count %></span>)
+        </div>
+        <br>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <div id="questions-form-container">
+        <div class="select-questions">
+          <%= render "select_questions" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="text-center">
+    <%= f.button :button, type: "button", id: "submit-exam-btn", class: "btn btn-sm btn-primary", name: nil do %>
+      <i class="fa fa-floppy-o" aria-hidden="true"></i>
+      Lưu đề thi
+    <% end %>
+  </div>
+  <br>
+<% end %>

@@ -1,0 +1,37 @@
+.select-box-question {
+  height: 400px;
+  overflow: scroll;
+}
+
+.each-question-in-exam {
+  margin-top: 20px;
+  border: 1px solid #3498DB;
+  border-radius: 6px;
+  padding: 6px 8px;
+  width: 99%;
+}
+
+.each-question-in-exam input {
+  margin-top: 0px;
+}
+
+.list-question-show-exam {
+  height: 700px;
+  overflow: scroll;
+}
+
+.table-exam-infor th {
+  width: 200px;
+}
+
+.modal-show-attempt {
+  width: 60% !important;
+}
+
+#search-avaiable-questions-by-user ~ .select2, #search-selected-questions-by-user ~ .select2 {
+  margin-bottom: 10px !important;
+}
+
+.random-question-table td {
+  padding: 10px;
+}

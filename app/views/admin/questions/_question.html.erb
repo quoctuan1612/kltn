@@ -1,0 +1,40 @@
+<tr>
+  <td class="text-center">
+    <%= create_index params[:page], question_counter, Settings.per_page_20 %>
+  </td>
+  <td>
+    <%= strip_tags(question.content).truncate(50) %>
+  </td>
+  <td class="text-center">
+    <%= truncate question.category_name, length: Settings.truncate_length_30 %>
+  </td>
+  <td class="text-center">
+    <%= question.user.user_name %>
+  </td>
+  <td class="text-center">
+    <p class="label label-<%= question.level_label %>"><%= question.level_i18n %></p>
+  </td>
+  <td class="text-center">
+    <p class="label label-<%= question.question_type_label %>"><%= question.question_type_i18n %></p>
+  </td>
+  <td class="text-center" >
+    <div class="btn-group option">
+      <%= link_to admin_question_path(question), class: "btn btn-xs btn-success button",
+        title: "Xem chi tiết", remote: true do %>
+        <i class="fa fa-eye"></i>
+      <% end %>
+    </div>
+    <div class="btn-group option">
+      <%= link_to edit_admin_question_path(question), class: "btn btn-xs btn-primary button",
+        title: "Sửa" do %>
+        <i class="fa fa-pencil icon"></i>
+      <% end %>
+    </div>
+    <div class="btn-group option">
+      <%= button_tag class: "btn btn-xs btn-danger confirm-delete-question button",
+        title: "Xóa", data:{id: question.id} do %>
+        <i class="fa fa-trash icon"></i>
+      <% end %>
+    </div>
+  </td>
+</tr>

@@ -1,0 +1,22 @@
+<div class="an-answer-container">
+  <div class="row">
+    <div class="col-md-10">
+      <%= f.cktext_area :content, ckeditor: {height: "100", removePlugins: "elementspath", resize_enabled: false, toolbar: "mini"} %>
+    </div>
+    <div class="col-md-2 option-answers">
+      <div class="text-center">
+        <%= f.hidden_field :is_true, value: false %>
+        <%= f.radio_button :is_true, true, disabled: used_question?(@question), class: "is_true_question" %>
+        <br>
+        <small>(câu trả lời đúng)</small>
+      </div>
+      <br>
+      <div class="text-center remove-answer-container">
+        <%= link_to "javascript:void(0)", class: "remove-answer-button" do %>
+          <i class="fa fa-times"></i> <%= "Xóa câu trả lời" %>
+        <% end %>
+      </div>
+    </div>
+  </div><br>
+  <%= f.hidden_field :_destroy, class: "is-delete-answer" %>
+</div>

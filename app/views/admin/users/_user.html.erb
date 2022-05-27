@@ -1,0 +1,39 @@
+<tr>
+  <td class="text-center">
+    <%= create_index params[:page], user_counter, Settings.per_page_20 %>
+  </td>
+  <td class="text-center">
+    <%= image_tag image_url(user), size: "40" %>
+  </td>
+  <td>
+    <%= link_to user.user_name, "javascript:void(0)"  %>
+  </td>
+  <td>
+    <%= user.email %>
+  </td>
+  <td class="text-center">
+    <p class="label label-<%= user.role_label %>"><%= user.role_i18n %></p>
+  </td>
+  <td class="text-center" >
+    <div class="btn-group option">
+      <%= link_to admin_user_path(user), class: "btn btn-xs btn-success button",
+        title: "Xem chi tiết", remote: true do %>
+        <i class="fa fa-eye"></i>
+      <% end %>
+    </div>
+    <div class="btn-group option">
+      <%= link_to edit_admin_user_path(user), class: "btn btn-xs btn-primary button",
+        title: "Sửa", remote: true do %>
+        <i class="fa fa-pencil icon"></i>
+      <% end %>
+    </div>
+    <% if current_user != user %>
+      <div class="btn-group option">
+        <%= button_tag class: "btn btn-xs btn-danger confirm-delete-user button",
+          title: "Xóa", data:{id: user.id} do %>
+          <i class="fa fa-trash icon"></i>
+        <% end %>
+      </div>
+    <% end %>
+  </td>
+</tr>

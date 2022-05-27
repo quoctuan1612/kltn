@@ -1,0 +1,64 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+html, body {
+  height: 100%;
+}
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+}
+#logo:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.app-title {
+  padding: 10px;
+}
+
+.app-title .app-name {
+  font-size: 25px;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+#content a:hover {
+  text-decoration: none;
+}
+
+li.dropdown-header {
+  padding: 5px 10px;
+  color: #394263;
+  background-color: #f9fafc;
+  border-top: 1px solid #eaedf1;
+  border-bottom: 1px solid #eaedf1;
+}
+
+.custom-dropdown {
+  width: 220px;
+  padding: 0px;
+}
+
+.container-body-user {
+  padding: 20px 300px 100px 300px;
+}
+
+.link-to-root {
+  padding: 10px;
+}
+
+.select2-container--default .select2-results__option[aria-disabled=true] {
+    display: none;
+}
+
+.form-edit-user {
+  margin-top: 100px;
+}

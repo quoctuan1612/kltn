@@ -1,0 +1,31 @@
+<tr>
+  <td class="text-center">
+    <%= create_index params[:page], category_counter, Settings.per_page_10 %>
+  </td>
+  <td>
+    <%= truncate category.name, length: Settings.truncate_length_30 %>
+  </td>
+  <td>
+    <%= truncate category.description, length: Settings.truncate_length_50 %>
+  </td>
+  <td class="text-center" >
+    <div class="btn-group option">
+      <%= link_to admin_category_path(category), class: "btn btn-xs btn-success button",
+        title: "Xem chi tiết", remote: true do %>
+        <i class="fa fa-eye"></i>
+      <% end %>
+    </div>
+    <div class="btn-group option">
+      <%= link_to edit_admin_category_path(category), class: "btn btn-xs btn-primary button",
+        title: "Sửa", remote: true do %>
+        <i class="fa fa-pencil icon"></i>
+      <% end %>
+    </div>
+    <div class="btn-group option">
+      <%= button_tag class: "btn btn-xs btn-danger confirm-delete-category button",
+        title: "Xóa", data:{id: category.id} do %>
+        <i class="fa fa-trash icon"></i>
+      <% end %>
+    </div>
+  </td>
+</tr>

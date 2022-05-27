@@ -1,0 +1,56 @@
+<div class="header-login-form">
+  <div class="text-center">
+    <%= image_tag asset_path('icon_app.png'), size: "100" %>
+    <h2>Đổi mật khẩu</h2>
+  </div>
+</div>
+<div class="login-form">
+  <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+    <%= f.hidden_field :reset_password_token %>
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="pull-right">
+          <strong>Mật khẩu:</strong>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <%= f.input :password, autocomplete: "current-password", label: false, placeholder: "Nhập mật khẩu" %>
+        <%# if @minimum_password_length %>
+          <!--<em>(<%#= @minimum_password_length %> characters minimum)</em> 
+        <%# end %><br />-->
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="pull-right">
+          <strong>Nhập lại MK:</strong>
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <%= f.input :password_confirmation, autocomplete: "current-password", label: false, placeholder: "Nhập lại mật khẩu" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-3">
+      </div>
+      <div class="col-sm-8">
+        <div class="actions">
+          <%= f.button :button, type: "submit", class: "login-button" do %>
+            <strong>Đổi mật khẩu</strong>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-sm-3">
+      </div>
+      <div class="col-sm-8">
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+
+  <% end %>
+</div>

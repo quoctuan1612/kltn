@@ -1,0 +1,28 @@
+<div class="each-question-in-exam">
+  <strong> Câu hỏi số <%= attempt_question_counter + 1 %> : </strong>
+  <div class="pull-right">
+    <%= raw attempt_question.choose_right? %>
+  </div>
+  <p><%= raw attempt_question.question.content %></p>
+  <hr>
+  <% attempt_question.question.answers.each do |answer| %>
+    <div class="margin-bottom-5">
+      <div class="row">
+        <div class="col-sm-1">
+          <div class="pull-right">
+            <% if attempt_question.question.single_choice? %>
+              <%= radio_button_tag "answer-#{answer.id}", nil, 
+                attempt_question.selected_answer.include?(answer.id.to_s), disabled: true %>
+            <% elsif attempt_question.question.multi_choice? %>
+              <%= check_box_tag "answer-#{answer.id}", nil, 
+                attempt_question.selected_answer.include?(answer.id.to_s), disabled: true %>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-sm-11">
+          <%= raw answer.content %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

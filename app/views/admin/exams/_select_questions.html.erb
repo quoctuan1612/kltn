@@ -1,0 +1,50 @@
+<div class="col-md-6">
+  <div class="block">
+    <div class="block-title text-center">
+      Danh sách câu hỏi có sẵn (<span class="avaiable-questions-count">
+        <%= @category.questions.by_not_ids(@exam.question_ids).count %></span>)
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <%= select_tag :user, options_for_select(select_box_contributor), class: "select-select2 form-control", 
+          include_blank: "-- Chọn người tạo --", id: "search-avaiable-questions-by-user" %>
+      </div>
+      <div class="col-md-12">
+        <%= text_field_tag :search_avaiable_questions, nil, {placeholder: "Tìm kiếm...", id: "search-avaiable-questions", class: "form-control"} %>
+      </div>
+    </div><hr>
+    <div class="select-box-question avaiable-questions">
+      <% @category.questions.by_not_ids(@exam.question_ids).each do |question| %>
+        <div class="block-question<%= "-cannot-change" if @exam.any_perform? %> <%= question.level %>-question" 
+          data-question-id="<%= question.id %>" data-user-id="<%= question.user_id %>">
+          <%= strip_tags(question.content).truncate(50) %>
+          <div class="difficult-level-<%= question.level %>"></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="col-md-6">
+  <div class="block">
+    <div class="block-title text-center">
+      Danh sách câu hỏi được chọn (<span class="selected-questions-count"><%= @exam.exam_questions.count %></span>)
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <%= select_tag :user, options_for_select(select_box_contributor), class: "select-select2 form-control", 
+          include_blank: "-- Chọn người tạo --", id: "search-selected-questions-by-user" %>
+      </div>
+      <div class="col-md-12">
+        <%= text_field_tag :search_selected_questions, nil, {placeholder: "Tìm kiếm...", id: "search-selected-questions", class: "form-control"} %>
+      </div>
+    </div><hr>
+    <div class="select-box-question selected-questions">
+      <% @exam.exam_questions.each do |exam_question| %>
+        <div class="block-question<%= "-cannot-change" if @exam.any_perform? %> <%= exam_question.question.level %>-question remove-exam" data-question-id="<%= exam_question.question_id %>"  data-id="<%= exam_question.id %>" data-user-id="<%= exam_question.question.user_id %>">
+          <%= strip_tags(exam_question.question.content).truncate(50) %>
+          <div class="difficult-level-<%= exam_question.question.level %>"></div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

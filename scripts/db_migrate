@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ $# -ne 2 ] && [ $# -ne 3 ]; then
+  echo "USAGE: db_migrate postgres://localhost:5610/<database>?<query> <up or down> [N]"
+  echo 'e.g., ./scripts/db_migrate "postgres://localhost:5610/app_development?sslmode=disable&user=postgres" up'
+  exit 1
+fi
+
+migrate -path db/migrate_sql -database $1 $2 $3
+docker-compose run --rm -T app bin/rails db:schema:dump

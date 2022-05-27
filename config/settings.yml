@@ -1,0 +1,24 @@
+per_page_10: 10
+per_page_20: 20
+per_page_30: 30
+truncate_length_50: 50
+truncate_length_30: 30
+question:
+  single_choice: single_choice
+  multi_choice: multi_choice
+  easy: easy
+  medium: medium
+  hard: hard
+user:
+  role:
+    trainee: trainee
+    trainer: trainer
+    admin: admin
+attempt:
+  status:
+    finish: finish
+    pending: pending
+  result:
+    passed: passed
+    failed: failed
+    all_values: ["passed", "failed"]

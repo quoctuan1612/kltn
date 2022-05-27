@@ -1,0 +1,56 @@
+<div class="header-login-form">
+  <div class="text-center">
+    <%= image_tag asset_path('icon_app.png'), size: "100" %>
+    <h2>Đăng nhập</h2>
+  </div>
+</div>
+<div class="login-form">
+  <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="row">
+      <div class="col-sm-2">
+        <div class="pull-right">
+          <i class="fa fa-envelope" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="col-sm-9">
+        <%= f.input :email, autofocus: true, autocomplete: "email", label: false, placeholder: "Nhập email" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-2">
+        <div class="pull-right">
+          <i class="fa fa-asterisk" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="col-sm-9">
+        <%= f.input :password, autocomplete: "current-password", label: false, placeholder: "Nhập mật khẩu" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-2">
+      </div>
+      <div class="col-sm-9">
+        <div class="actions">
+          <%= f.button :button, type: "submit", class: "login-button" do %>
+            <strong>Đăng nhập</strong>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <br>
+    <% if devise_mapping.rememberable? %>
+      <div class="row">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-9">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me %><br>
+        </div>
+      </div>
+    <% end %>
+
+  <% end %>
+</div>
+

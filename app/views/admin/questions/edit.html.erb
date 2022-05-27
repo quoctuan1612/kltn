@@ -1,0 +1,103 @@
+<div class="content-header">
+  <div class="header-section">
+    <h2>
+      <i class="fa fa-book">&nbsp;</i>Quản lý câu hỏi<br>
+      <small>Trang sửa câu hỏi</small>
+    </h2>
+  </div>
+</div>
+<div class="block full">
+  <div class="block-title text-center">
+    <strong> Sửa câu hỏi </strong>
+  </div><br>
+  <%= simple_form_for [:admin, @question], html: {id: "create-question-form"} do |f| %>
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-7">
+        <div class="text-danger">
+          <% f.object.errors[:base].each do |msg| %>
+            <%= msg %><br/>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="pull-right">
+          <strong><span class="text-danger">* </span>Danh mục</strong>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <%= f.input :category_id, as: :select, collection: select_box_category, selected: @question.category_id,
+          include_blank: false, input_html: {class: "select-select2"}, 
+          label: false %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <div class="pull-right">
+          <strong><span class="text-danger">* </span>Loại câu hỏi</strong>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <%= f.input :question_type, as: :select, collection: select_box_question_type, selected: @question.question_type,
+          include_blank: false, input_html: {class: "select-select2", id: "js-select-question-type"}, 
+          label: false %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <div class="pull-right">
+          <strong><span class="text-danger">* </span>Độ khó</strong>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <%= f.input :level, as: :select, collection: select_box_level, selected: @question.level,
+          include_blank: false, input_html: {class: "select-select2"}, 
+          label: false %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <div class="pull-right">
+          <strong><span class="text-danger">* </span>Nội dung</strong>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <%= f.cktext_area :content, required: true %>
+        <div class="text-danger">
+          <%= f.object.errors[:content].first %>
+        </div>
+      </div>
+    </div><br>
+
+    <div class="row">
+      <div class="col-md-3">
+        <div class="pull-right">
+          <strong><span class="text-danger">* </span>Câu trả lời</strong>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <div id="answers-form-container">
+          <%= f.fields_for :answers do |ff| %>
+            <%= render "answer_fields", f: ff %>
+          <% end %>
+          <%= link_to_add_fields '+ Thêm mới câu trả lời', f, :answers %>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="text-center">
+      <%= f.button :button, type: "submit", id: "submit-question-btn", class: "btn btn-sm btn-primary", name: nil do %>
+        <i class="fa fa-floppy-o" aria-hidden="true"></i>
+        Sửa câu hỏi
+      <% end %>
+    </div>
+  <% end %>
+ </div>
+ <script type="text/javascript">
+   <%= render "answer.js.erb" %>
+ </script>

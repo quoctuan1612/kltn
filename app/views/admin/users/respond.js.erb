@@ -1,0 +1,5 @@
+<%= render "shared/js_flash_messages.js.erb" %>
+$('#user-modal').html('<%= j render "form", title: "Thêm mới người dùng" %>')
+$('#user-modal').appendTo("body").modal('show');
+uploadUserAvatar();
+

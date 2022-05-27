@@ -1,0 +1,24 @@
+<% if flash[:danger] %>
+  resetAlert();
+  $('#alert-notification').addClass('alert-danger');
+  $('#alert-notification').append('<%= j flash[:danger] %>');
+  $('#alert-notification').show();
+<% elsif flash[:success]%>
+  resetAlert();
+  $('#alert-notification').addClass('alert-success');
+  $('#alert-notification').append('<%= j flash[:success] %>');
+  $('#alert-notification').show();
+<% end %>
+
+function resetAlert() {
+  $('#alert-notification')
+  .contents()
+  .filter(function() {
+    return this.nodeType === 3;
+  }).remove();
+  $('#alert-notification').removeClass('alert-success alert-danger');
+}
+
+setTimeout(function() {
+  $('#alert-notification').fadeOut(3000);
+}, 5000);

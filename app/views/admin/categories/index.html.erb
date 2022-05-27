@@ -1,0 +1,59 @@
+<div class="content-header">
+  <div class="header-section">
+    <h2>
+      <i class="fa fa-book">&nbsp;</i>Quản lý danh mục<br>
+      <small>Trang quản lý danh mục</small>
+    </h2>
+  </div>
+</div>
+<div class="block full">
+  <div class="block-title">
+    <h4> Danh sách danh mục </h4>
+  </div><br>
+  <div class="table-responsive test-created-table">
+    <div class="dataTables_wrapper">
+      <div class="row">
+        <div class="col-md-3 mb-10 remove-padding">
+          <div>
+            <%= link_to new_admin_category_path, class: "btn btn-primary margin-left-5", remote: true do %>
+              <i class="fa fa-plus"></i> Thêm danh mục
+            <% end %>
+          </div>
+        </div>
+        <div class="col-md-5"></div>
+        <div class="col-md-4">
+          <div class="pull-right">
+            <div class="input-group">
+              <%= text_field_tag "name_or_description_cont", nil, class: "form-control", 
+                placeholder: "Tìm kiếm danh mục theo tên và mô tả",
+                id: "admin_category_search" %>
+              <div class="input-group-btn">
+                <%= button_tag(name: nil, class: "btn btn-primary", id: "admin_category_search_btn") do %>
+                  <i class="fa fa-search"></i>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><br>
+      <table class="table table-vcenter table-condensed table-bordered">
+        <thead>
+          <tr>
+            <th class="text-center">STT</th>
+            <th class="text-center">Tên danh mục</th>
+            <th class="text-center">Mô tả</th>
+            <th class="text-center">Tùy chọn</th>
+          </tr>
+        </thead>
+        <tbody id="list-categories">
+          <%= render @categories %>
+        </tbody>
+      </table>
+    </div>
+    <div class="digg_pagination">
+      <%= will_paginate @categories %>
+    </div>
+  </div>
+</div>
+<div id="form-category-modal" class="modal fade" data-backdrop="static"></div>
+<div id="show-category-modal" class="modal fade" data-backdrop="static"></div>

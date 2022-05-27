@@ -1,0 +1,107 @@
+<%= simple_form_for Attempt.new, html: {id: "form-do-exam"} do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="dataTables_length">
+        <div class="form-group push-bit">
+          <%= select_tag :category_id, 
+            options_for_select(select_box_category),
+            include_blank: "--Chọn danh mục--", disabled: @exam,
+            class: "form-control",
+            id: "select-category-id" %>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="dataTables_length">
+        <div class="form-group push-bit">
+          <%= f.select :exam_id, 
+            options_for_select(select_box_exam),
+            {include_blank: "--Chọn đề thi--"},{
+            class: "form-control",
+            id: "select-exam-id"} %>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="dataTables_length">
+        <div class="form-group push-bit">
+          <%= f.input :password, label: false, placeholder: "Nhập mật khẩu" %>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="dataTables_length">
+        <div class="form-group push-bit">
+          <%= f.button :button, type: "button", class: "btn btn-sm btn-primary", id: "do-exam-btn" do %>
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            Làm bài
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+<hr>
+<div class="text-center">
+  <h3>Kết quả lần thi gần đây</h3>
+</div><br>
+<div class="row">
+  <div class="col-md-3">
+    <%= select_tag :filter_category_id, 
+      options_for_select(select_box_category),
+      include_blank: "--Chọn danh mục--",
+      class: "select-select2 form-control",
+      id: "filter-category-id" %>
+  </div>
+  <div class="col-md-3">
+    <%= select_tag :filter_exam_id, 
+      options_for_select(select_box_exam),
+      include_blank: "--Chọn đề thi--",
+      class: "select-select2 form-control",
+      id: "filter-exam-id" %>
+  </div>
+  <div class="col-md-3">
+    <%= select_tag :filter_status, 
+      options_for_select(select_box_status),
+      include_blank: "--Chọn trạng thái--",
+      class: "select-select2 form-control",
+      id: "filter-status" %>
+  </div>
+  <div class="col-md-3">
+    <%= select_tag :filter_status, 
+      options_for_select(select_box_result),
+      include_blank: "--Chọn kết quả--",
+      class: "select-select2 form-control",
+      id: "filter-result" %>
+  </div>
+</div><br>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th class="text-center" scope="col">#</th>
+      <th class="text-center" scope="col">Tên đề thi</th>
+      <th class="text-center" scope="col">Danh mục</th>
+      <th class="text-center" scope="col">Ngày làm</th>
+      <th class="text-center" scope="col">Trạng thái</th>
+      <th class="text-center" scope="col">Độ dài bài thi</th>
+      <th class="text-center" scope="col">Thời gian hoàn thành</th>
+      <th class="text-center" scope="col">Kết quả</th>
+      <th class="text-center" scope="col">Tùy chọn</th>
+    </tr>
+  </thead>
+  <tbody class="list-attempts">
+    <% if @attempts.any? %>
+      <%= render partial: "static_pages/attempt", collection: @attempts, as: :attempt %>
+    <% end %>
+  </tbody>
+</table>
+<% if @attempts.empty? %>
+  <div class="text-center">
+    <small>Bạn chưa làm bài thi nào</small>
+  </div>
+<% end %>
+<div class="digg_pagination">
+  <%= will_paginate @attempts %>
+</div>
+<div id="show-attempt-modal" class="modal fade" data-backdrop="static"></div>

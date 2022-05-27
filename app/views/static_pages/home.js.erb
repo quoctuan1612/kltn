@@ -1,0 +1,6 @@
+<% if @attempts.any? %>
+  $('.list-attempts').html('<%= j render partial: "static_pages/attempt", collection: @attempts, as: :attempt %>');
+<% else %>
+  $('.list-attempts').html('<tr><td colspan="9" class="text-center"><small>Bạn chưa làm bài thi nào</small></td></tr>');
+<% end %>
+$('.digg_pagination').html('<%= will_paginate @attempts %>')

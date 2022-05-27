@@ -1,0 +1,14 @@
+<div class="row">
+  <% if current_user.admin? %>
+    <%= render "count_item", icon: "fa-users", count: @count_trainee,
+      desc: "Tài khoản học viên", path: admin_users_path %>
+    <%= render "count_item", icon: "fa-users purple", count: @count_trainer,
+      desc: "Tài khoản giáo viên", path: admin_users_path %>
+    <%= render "count_item", icon: "fa-folder-open blue", count: @count_category,
+      desc: "Danh mục", path: admin_categories_path %>
+  <% end %>
+  <%= render "count_item", icon: "fa-question-circle red", count: @count_question,
+    desc: "Câu hỏi", path: admin_questions_path %>
+  <%= render "count_item", icon: "fa-file gold", count: @count_exam,
+    desc: "Đề thi", path: admin_exams_path %>
+</div>

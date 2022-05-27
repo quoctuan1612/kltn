@@ -1,0 +1,81 @@
+<div class="content-header">
+  <div class="header-section">
+    <h2>
+      <i class="fa fa-question-circle">&nbsp;</i>Quản lý câu hỏi<br>
+      <small>Trang quản lý câu hỏi</small>
+    </h2>
+  </div>
+</div>
+<div class="block full">
+  <div class="block-title">
+    <h4> Danh sách câu hỏi </h4>
+  </div><br>
+  <div class="table-responsive">
+    <div class="dataTables_wrapper">
+      <div class="row">
+        <div class="col-md-3 mb-10 remove-padding">
+          <div>
+            <%= link_to new_admin_question_path, class: "btn btn-primary margin-left-5" do %>
+              <i class="fa fa-plus"></i> Thêm câu hỏi
+            <% end %>
+          </div>
+        </div>
+      </div><br>
+      <div class="row">
+        <div class="col-md-3">
+          <%= select_tag :category, options_for_select(select_box_category), class: "select-select2", 
+            include_blank: "-- Chọn danh mục --", id: "category-filter-question" %>
+        </div>
+        <div class="col-md-3">
+          <%= select_tag :user, options_for_select(select_box_contributor), class: "select-select2", 
+            include_blank: "-- Chọn người tạo --", id: "user-filter-question" %>
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+          <div class="pull-right">
+            <div class="input-group">
+              <%= text_field_tag "content_or_answers_content_cont", nil, class: "form-control", 
+                placeholder: "Tìm kiếm câu hỏi theo tên nội dung câu hỏi và nội dung đáp án",
+                id: "admin_question_search" %>
+              <div class="input-group-btn">
+                <%= button_tag(name: nil, class: "btn btn-primary", id: "admin_question_search_btn") do %>
+                  <i class="fa fa-search"></i>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <%= select_tag :level, options_for_select(select_box_level), class: "select-select2", 
+            include_blank: "-- Chọn độ khó --", id: "level-filter-question" %>
+        </div>
+        <div class="col-md-3">
+          <%= select_tag :question_type, options_for_select(select_box_question_type), class: "select-select2", 
+            include_blank: "-- Chọn loại câu hỏi --", id: "type-filter-question" %>
+        </div>
+      </div><br>
+      <table class="table table-vcenter table-condensed table-bordered">
+        <thead>
+          <tr>
+            <th class="text-center">STT</th>
+            <th class="text-center">Nội dung câu hỏi</th>
+            <th class="text-center">Danh mục</th>
+            <th class="text-center">Người tạo</th>
+            <th class="text-center">Độ khó</th>
+            <th class="text-center">Loại câu hỏi</th>
+            <th class="text-center">Tùy chọn</th>
+          </tr>
+        </thead>
+        <tbody id="list-questions">
+          <%= render @questions %>
+        </tbody>
+      </table>
+    </div>
+    <div class="digg_pagination">
+      <%= will_paginate @questions %>
+    </div>
+  </div>
+</div>
+<div id="show-question-modal" class="modal fade" data-backdrop="static"></div>

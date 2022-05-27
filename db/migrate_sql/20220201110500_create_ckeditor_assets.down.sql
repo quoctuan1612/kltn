@@ -1,0 +1,1 @@
+DROP TABLE ckeditor_assets;
